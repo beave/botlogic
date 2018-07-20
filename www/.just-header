@@ -1,0 +1,30 @@
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<title>botlogic.io | Hunting bots for the lulz</title>
+
+    <meta name="description" content="Botlogic - Hunting bots for the lulz"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://botlogic.io/_.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">
+
+      <a href="https://twitter.com/botlogic_io"  style="color:white">@Botlogic_io</a>   </h1>
+
+
+      <h2 class="project-tagline">"Man is a robot with defects."</h2>
+
+      <a href="https://botlogic.io/" class="btn">Botlogic.io Home</a>
+      <a href="https://botlogic.io/?api=help" class="btn">Using the Botlogic.io API</a>
+      
+      
+    </section>
+
+    <section class="main-content">
+
+<p></b>

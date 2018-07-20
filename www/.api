@@ -1,0 +1,14 @@
+<!-- <center><h1>Botlogic API:</h1></center><p> -->
+
+The Botlogic API is easy and free to use.   <p>
+
+Simply query the Twitter “<i>screen name</i>” you are interested in and the Botlogic API will return information about the user in a JSON format.   For example,  lets say you wanted to query the Twitter screen name <a href="https://twitter.com/botlogic_io">@botlogic_io</a>.   This is how you would do it.<p>
+
+<a href="https://botlogic.io/?sn=botlogic_io&json=true">https://botlogic.io/?sn=botlogic_io&json=true</a><p>
+
+The <i>json=true</i> tells the Botlogic systems that you would like the information returned in a JSON format. 
+
+Rate limiting the requests to the API is done via source IP address.   You are allowed to query the API 20 times within one second.   This is done to reduce abuse.   
+
+If you have any questions,  please e-mail <a href="email:bot@botlogic.io">bot@botlogic.io<p>
+

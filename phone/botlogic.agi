@@ -1,0 +1,163 @@
+#!/usr/bin/perl 
+
+##############################################################################
+# Copyright (C) 2018 Botlogic LLC <botlogic.io>
+# By "Da Beave" (beave@botlogic.io) 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License Version 2 as
+# published by the Free Software Foundation.  You may not use, modify or
+# distribute this program under any other version of the GNU General
+# Public License.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+##############################################################################
+
+#############################################################################
+# botlogic.agi - This works with the Asterisk phone system and acts as the 
+# company IVR. 
+#############################################################################
+
+use Asterisk::AGI;
+use Config::Simple;
+use DBI;
+
+my $AGI = new Asterisk::AGI;
+my %input = $AGI->ReadParse();
+
+my @now = localtime();
+
+# Generates YYYYMMDDhhmmss
+ my $timestamp = sprintf("%04d%02d%02d%02d%02d%02d", 
+                         $now[5]+1900, $now[4]+1, $now[3],
+                                                 $now[2],      $now[1],   $now[0]);
+
+my $mysql_username = "bot_voip";
+my $mysql_password = "kask00kak1ss11";
+my $mysql_server = "192.168.1.11";
+my $mysql_database = "bot";
+
+my $display_name = "[Botlogic-AGI]";
+
+my $phone_code;
+my $id;
+my $type;
+my $screen_name;
+
+my $sql;
+
+$AGI->verbose( "$display_name Start routine.",1); 
+
+my $db  = "DBI:mysql:database=$mysql_database;host=$mysql_server";
+my $dbh = DBI ->connect($db, $mysql_username, $mysql_password) || die "[E] Cannot connect to MySQL.\n";
+
+$AGI->verbose("$display_name Environment Dump.");
+
+foreach $i (sort keys %input) {
+		$AGI->verbose("$display_name -- $i = $input{$i}");
+	}
+
+$AGI->verbose( "$display_name incoming call from '" . $input{callerid} . "'" ); 
+$AGI->verbose( "$display_name Good Database connection.",1);
+
+$AGI->exec('Playback', 'botlogic/thank-you');
+$AGI->exec('Playback', 'botlogic/recorded');
+
+$recfile = "wav,unknown-" . $input{callerid} . "-$timestamp,m";
+$AGI->exec('Monitor', $recfile);
+
+sleep(2);
+$AGI->exec('Playback', 'botlogic/about-1');
+sleep(1);
+$AGI->exec('Playback', 'botlogic/about-2');
+sleep(2);
+
+&Get_ID();
+
+$sql = "INSERT INTO phone (id, phone_number) VALUES (?, ?)"; 
+$tsql = $dbh->prepare($sql);
+$tsql->bind_param(1, $id);
+$tsql->bind_param(2, $input{callerid}); 
+$tsql->execute || die "$display_name $DBI::errstr\n";
+
+$AGI->verbose( "ID: $id, Code: $phone_code, type: $type, screen_name: $screen_name" ); 
+
+$recfile = "wav,$id-" . $input{callerid} . "-$phone_code-$timestamp,m"; 
+$AGI->exec('Monitor', $recfile);
+
+$AGI->exec("Playback", "botlogic/beep-ring"); 
+$AGI->exec("Playback", "botlogic/another-rep");
+
+$callerid = "CALLERID(all)=\"$screen_name\" <$phone_code|$type>"; 
+$AGI->exec('Set', $callerid); 
+$AGI->exec('Dial', 'SIP/Beave-1,30,m');
+
+$vmfile = "/voicemail/$id-$phone_code-$timestamp";
+$AGI->exec("Playback", "nobody-avaliable"); 
+$AGI->exec("Record", "$vmfile:wav");
+
+$AGI->hangup();
+exit;
+
+sub Get_ID
+{
+	
+	my $count = 0; 
+	my $login_success = 0; 
+
+	my $playfile = "botlogic/enter-your-id";
+
+	while ( $login_success == 0 ) 
+	{
+
+	$phone_code = $AGI->get_data($playfile, 3000, 99);  # Please enter your pin number
+	
+
+	$AGI->verbose( "$display_name User entered ID number '$phone_code'.",1);
+
+        if ( $count >= 3 ) {
+
+	# Play instrucitons on how to find the id and hangup.
+	#
+	$AGI->exec("Playback", "botlogic/Goodbye");
+        $AGI->hangup();
+        exit;
+									                }
+
+	$sql = "SELECT id, type, screen_name FROM twitter WHERE phone_code = ?";
+	$tsql = $dbh->prepare($sql);
+	$tsql->bind_param(1, $phone_code);
+	$tsql->execute || die "$display_name $DBI::errstr\n";
+
+	@sqlout = $tsql->fetchrow_array;
+
+        if ( $sqlout[0] )
+                {
+                $login_success = 1;
+		$id = $sqlout[0];
+		$type = $sqlout[1];
+		$screen_name = $sqlout[2];
+		$AGI->exec("Playback", "botlogic/located");
+                } else {
+		$playfile = "botlogic/cant-find-id"; 
+                }
+
+
+	if ( $count >= 3 ) { 
+
+		$AGI->stream_file('goodbye', '0000');
+		$AGI->hangup();
+		exit;
+		}
+
+	$count++; 
+	}
+
+}
