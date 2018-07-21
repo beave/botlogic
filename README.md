@@ -5,6 +5,9 @@ Web: http://hope.net ) a presentation was given by Da Beave & Faux Real bout
 "Bots" & "Fake News".  This repo contains the source code used to generate the
 data used for that talk. 
 
+You can download the presentation via the following link:
+
+https://github.com/beave/botlogic/raw/master/Trolling-The-Trolls-And-The-Trolls-That-Troll-Them.pdf
 
 Please check back later.  We will be updating the README.md with links to the 
 presentations video & presentation material. 
