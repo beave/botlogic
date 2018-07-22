@@ -11,6 +11,8 @@ https://github.com/beave/botlogic/blob/master/Trolling-The-Trolls-And-The-Trolls
 Download:
 https://github.com/beave/botlogic/raw/master/Trolling-The-Trolls-And-The-Trolls-That-Troll-Them.pdf
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RYGYa-EPzHw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 Please check back later.  We will be updating the README.md with links to the 
 presentations video & presentation material. 
