@@ -6,9 +6,6 @@ Web: http://hope.net ) a presentation was given by Da Beave & Faux Real bout
 data used for that talk. 
 
 
-
-[![Trolling the trolls & the trolls that troll them.](https://youtu.be/vi/RYGYa-EPzHw/0.jpg)]( "Every://www.youtube.com/watch?v=RYGYa-EPzHw&feature=youtu.be Trolling the trolls & the trolls that troll them")
-
 Watch the presentation:
 https://youtu.be/RYGYa-EPzHw
 
