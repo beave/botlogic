@@ -8,7 +8,7 @@ data used for that talk.
 
 <b>Watch the presentation:</b>
 
-<br>Office HOPE 2018 Video: https://youtu.be/oQUwWkGXhTA </b>
+<b>Office HOPE 2018 Video: https://youtu.be/oQUwWkGXhTA </b>
 
 Livestream Video: https://livestream.com/accounts/686369/events/8286143/videos/178158654
 
