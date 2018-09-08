@@ -9,7 +9,9 @@ data used for that talk.
 Watch the presentation:
 
 Office HOPE 2018 Video: https://youtu.be/oQUwWkGXhTA
+
 Livestream Video: https://livestream.com/accounts/686369/events/8286143/videos/178158654
+
 Slides Only: https://youtu.be/RYGYa-EPzHw 
 
 View the PDF:
