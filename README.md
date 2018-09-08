@@ -6,18 +6,18 @@ Web: http://hope.net ) a presentation was given by Da Beave & Faux Real bout
 data used for that talk. 
 
 
-Watch the presentation:
+<b>Watch the presentation:</b>
 
 Office HOPE 2018 Video: https://youtu.be/oQUwWkGXhTA
 
 Livestream Video: https://livestream.com/accounts/686369/events/8286143/videos/178158654
 
-Slides Only: https://youtu.be/RYGYa-EPzHw 
+Slides Only: https://youtu.be/RYGYa-EPzHw
 
-View the PDF:
+<b>View the PDF:</b>
 https://github.com/beave/botlogic/blob/master/Trolling-The-Trolls-And-The-Trolls-That-Troll-Them.pdf
 
-Download the PDF
+<b>Download the PDF</b>
 https://github.com/beave/botlogic/raw/master/Trolling-The-Trolls-And-The-Trolls-That-Troll-Them.pdf
 
 Please check back later.  We will be updating the README.md with links to the 
